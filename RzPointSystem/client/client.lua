@@ -3,8 +3,8 @@ AddEventHandler("baseevents:onPlayerKilled", function(killerId, deathData)
 end)
 
 
-AddEventHandler("baseevents:onPlayerDied", function()
-  TriggerServerEvent("addDeath")
+AddEventHandler("baseevents:onPlayerDied", function(playerId)
+  TriggerServerEvent("addDeath", playerId)
 end)
 
 
@@ -23,11 +23,7 @@ local displaytext = true
 
 RegisterCommand("display", function()
   Citizen.CreateThread(function()
-    if displaytext == true then
-      displaytext = false
-    elseif displaytext == false then
-      displaytext = true
-    end
+    displaytext = not displaytext
   end)
 end)
 
@@ -36,15 +32,14 @@ end)
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(5)
-      if displaytext == true then
-      SetTextFont(config.Font)
-      SetTextColour(config.R, config.G, config.B, 255)
-      SetTextScale(config.ScaleX, config.ScaleY)
+    if displaytext == true then
+      SetTextFont(Config.Design.Font)
+      SetTextColour(Config.Design.R, Config.Design.G, Config.Design.B, 255)
+      SetTextScale(Config.Design.ScaleX, Config.Design.ScaleY)
       SetTextEntry("STRING")
       SetTextCentre(true)
-      AddTextComponentString(tostring(config.PointsName .. ": " .. kills))
-      DrawText(config.X, config.Y)
-   elseif displaytext == false then
+      AddTextComponentString(tostring(Config.Points.PointsName .. ": " .. kills))
+      DrawText(Config.Design.X, Config.Design.Y)
     end
   end
 end)
