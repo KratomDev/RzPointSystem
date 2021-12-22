@@ -1,5 +1,7 @@
 config = {
-	points = 1, -- Change the "1" to whatever amount of points, you want to get per kill.
+	points = 100, -- Change the "1" to whatever amount of points, you want to get per kill.
+
+	DeathPoints = 1, -- Change the "1" to whatever amount of points, you want to lose per death.
 	
 	PointsName = "Points", -- Change the "Points" to whatever name you want it to display as.
 	
